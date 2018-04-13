@@ -20,12 +20,8 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	//	"strconv"
-	//"strings"
 
 	"github.com/LilyFaFa/capstan-pusher/pkg/push"
-	//	"github.com/prometheus/client_golang/prometheus"
-	//"github.com/prometheus/client_golang/prometheus/push"
 )
 
 func main() {
