@@ -30,17 +30,17 @@ func main() {
 
 	if *PGWEndpoint == "" {
 		fmt.Fprintf(os.Stderr, "%s\n", "No phase named endpoint found")
-		os.Exit(0)
+		os.Exit(1)
 	}
 
 	if len(flag.Args()) != 1 {
 		fmt.Fprintf(os.Stderr, "%s\n", "The format of the result cannot be resolved.")
-		os.Exit(0)
+		os.Exit(1)
 	}
 
 	err := push.Push(flag.Args()[0], *PGWEndpoint)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s\n", err)
-		os.Exit(0)
+		os.Exit(1)
 	}
 }

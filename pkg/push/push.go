@@ -30,7 +30,7 @@ func Push(result string, endpoint string) error {
 	entries := strings.Split(result, "\\n")
 	for _, entry := range entries {
 		item := strings.Split(entry, " ")
-		if len(item) != 4 {
+		if len(item) < 3 {
 			return errors.New("The data format does not meet the requirements.")
 		}
 		err := PushEntry(item, endpoint)
@@ -42,10 +42,19 @@ func Push(result string, endpoint string) error {
 }
 
 func PushEntry(item []string, endpoint string) error {
-	collections, err := ConvertToCollection(item[2] + " " + item[3])
+	pushData := item[2]
+	if len(item) > 3 {
+		for i := 3; i < len(item); i++ {
+			pushData += " "
+			pushData += item[i]
+		}
+	}
+
+	collections, err := ConvertToCollection(pushData)
 	if err != nil {
 		return err
 	}
+	fmt.Println(collections)
 	// Get the job name
 	jobName, ok := collections["job"]
 	if !ok {
